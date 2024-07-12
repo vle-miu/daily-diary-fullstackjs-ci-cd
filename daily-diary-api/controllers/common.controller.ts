@@ -1,5 +1,6 @@
 import { NextFunction, Request, RequestHandler, Response } from "express";
 import { CustomError } from "../utils/custom-error";
+import { StatusCodes } from "../models/enums/status.enum";
 
 /**
  * Handle if there is no route
@@ -13,5 +14,5 @@ export const notFoundRouteHandler: RequestHandler = (
     res: Response,
     next: NextFunction
 ) => {
-    next(new CustomError(404, "Not found route"));
+    next(new CustomError(StatusCodes.NOT_FOUND, "Not found route"));
 };

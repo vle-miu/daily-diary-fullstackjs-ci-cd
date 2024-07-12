@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import { notFoundRouteHandler } from "./controllers/common.controller";
 import { errorHandler, logRequest } from "./middlewares/middleware";
-import diaryRouter from "./routes/diary/diary.routes";
+import postRouter from "./routes/posts/post.routes";
 import "dotenv/config";
 
 // initial application
@@ -10,10 +10,10 @@ const server = express();
 
 // configuration
 server.use(cors());
-server.use(logRequest);
 
 // middleware
-server.use("/api/diary", diaryRouter);
+server.use(logRequest);
+server.use("/api/posts", postRouter);
 
 // routers
 server.all("*", notFoundRouteHandler);
