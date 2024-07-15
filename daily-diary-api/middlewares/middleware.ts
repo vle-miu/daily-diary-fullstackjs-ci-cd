@@ -1,5 +1,5 @@
 import morgan from "morgan";
-import fs, { access } from "fs";
+import fs from "fs";
 import path from "path";
 import "dotenv/config";
 import { ErrorRequestHandler, NextFunction, Request, Response } from "express";
@@ -25,7 +25,7 @@ export const errorLogStream = fs.createWriteStream(errorlogFile, {
 });
 
 /**
- * Handle all the server errors
+ * Handle the server errors
  *
  * @param error
  * @param req

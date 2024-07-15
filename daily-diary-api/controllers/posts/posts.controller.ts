@@ -128,7 +128,15 @@ export const getAllPostsHandler: RequestHandler<
             generateDataFilenameByDate(req.query.date)
         );
 
-        res.status(StatusCodes.SUCCESS).json(postService.getAllPosts());
+        let posts: Post[] = postService.getAllPosts();
+        posts.sort((e1, e2) => {
+            if (e2.vote > e1.vote) {
+                return 1;
+            }
+            return -1;
+        });
+
+        res.status(StatusCodes.SUCCESS).json(posts);
     } catch (error) {
         next(error);
     }
