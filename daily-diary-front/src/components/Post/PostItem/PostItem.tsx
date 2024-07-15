@@ -17,6 +17,7 @@ import Votes from "../Votes/Votes";
 import { Post } from "../../../models/Post";
 import { GlobalContext } from "../../../contexts/PostsContext";
 import { isToday } from "date-fns";
+import { convertDateToFormat } from "../../../utils/utils";
 
 interface ExpandMoreProps extends IconButtonProps {
     expand: boolean;
@@ -44,7 +45,7 @@ export default function PostItem({ post }: { post: Post }) {
                 subheader={
                     isToday(searchDate)
                         ? "Today"
-                        : searchDate.toLocaleDateString()
+                        : convertDateToFormat(searchDate, "MMMM dd, yyyy")
                 }
             ></CardHeader>
             <CardMedia

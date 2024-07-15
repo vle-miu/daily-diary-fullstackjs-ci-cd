@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, CardHeader, Container } from "@mui/material";
+import { Card, CardContent, CardHeader, Container } from "@mui/material";
 import PostListItem from "../../components/Post/PostListItem/PostListItem";
 import DateButtonGroup from "../../components/Post/DateButtonGroup/DateButtonGroup";
 import { useContext, useEffect } from "react";
@@ -8,8 +8,10 @@ import { convertDateToFormat } from "../../utils/utils";
 import { Post } from "../../models/Post";
 import { CustomError } from "../../utils/customError";
 import { isToday } from "date-fns";
+import { useLocation } from "react-router-dom";
 
 export default function PostPage() {
+    const location = useLocation();
     const postService = new PostService();
     const {
         posts,
@@ -19,7 +21,14 @@ export default function PostPage() {
         updatePosts,
         updateLoading,
         updateNotify,
+        updateIsVoted,
+        updateIsAddedNew,
+        updateSearchDate,
     } = useContext(GlobalContext);
+
+    useEffect(() => {
+        updateSearchDate(new Date());
+    }, [location]);
 
     useEffect(() => {
         fetchPosts();
@@ -27,6 +36,8 @@ export default function PostPage() {
 
     const fetchPosts = async () => {
         updateLoading(true);
+        updateIsVoted(false);
+        updateIsAddedNew(false);
         try {
             const posts: Post[] = await postService.getAllPosts(
                 convertDateToFormat(searchDate, "MM-dd-yyyy")
@@ -54,7 +65,7 @@ export default function PostPage() {
                     title={`List Posts (${
                         isToday(searchDate)
                             ? "Today"
-                            : searchDate.toLocaleDateString()
+                            : convertDateToFormat(searchDate, "MMMM dd, yyyy")
                     })`}
                 />
                 <CardContent>

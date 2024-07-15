@@ -96,6 +96,10 @@ export default function ContactUs() {
         return tempErrors.isValidForm;
     };
 
+    const resetInquiryForm = () => {
+        setContactUsForm(contactUsFormInit);
+    };
+
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setContactUsForm({ ...contactUsForm, [e.target.name]: e.target.value });
     };
@@ -120,6 +124,7 @@ export default function ContactUs() {
                 message:
                     "Send inquiry successfully. Thank you for your feedback, we will contact you soon!",
             });
+            resetInquiryForm();
         } catch (error) {
             let errMsg: string = "Unknow error";
             if (error instanceof CustomError) {

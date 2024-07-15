@@ -32,11 +32,15 @@ export default function DateButtonGroup() {
                     Next
                 </Button>
             </ButtonGroup>
-            <Link to="/posts/add">
-                <Button variant="contained" startIcon={<AddIcon />}>
-                    Add
-                </Button>
-            </Link>
+            <Button
+                component={Link}
+                to="/posts/add"
+                variant="contained"
+                startIcon={<AddIcon />}
+                disabled={!isToday(searchDate)}
+            >
+                Add
+            </Button>
         </Box>
     );
 }
