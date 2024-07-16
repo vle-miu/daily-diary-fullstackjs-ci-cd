@@ -29,6 +29,8 @@ This is a standalone project. You will create a full-stack web application using
 * Deploy the frontend on a service like Netlify or Vercel.
 * Deploy the backend on a service like Heroku or Render.
 * Provide links to the deployed applications.
+    * Frontend: https://66958bfbc89110b777a2696b--daily-diary-app.netlify.app/
+    * Backend: https://daily-diary-api-0b265200be7a.herokuapp.com/api
 
 ## Evaluation Criteria
 * Does the application meet all specified requirements?
